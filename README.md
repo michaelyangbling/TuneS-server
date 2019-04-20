@@ -1,29 +1,41 @@
-# TuneS
-npm start dev
-dev configured with local mongodb
-prod configured with heroku env mongodb
-mongodb local: mongod --port 12345
+# TuneS (Back-End)
 
-verify schema for: update, create
+TuneS is a music search and social website powered by Spotify Web API. Major features are:
 
-1.user not in session- error
-2.user in session but not in database --error, so may cause "follow" bugs, but not possible in most cases
-3. user in session and in database --if transction, OK
+* Serch subject by track / album / artist.
+* Like subject or comment.
+* Comment on the subject.
+* Follow users.
+* View user profile.
 
-validated that user id and subject id are strings.
-find by string for onjectId is OK, object is will go to frontend string
-but set string as objectId in ref is not OK, need  ObjectId(string) to convert
-#
-saveUser in user.dao.js changed to transactional database access, han's previous change is not transactional, thus may lead to unexpected database change
- = (user, callback) => {
-  return userModel.collection.update({sid: payload.profile.id}, { $setOnInsert: user },
-    { upsert: true }, (err, res)=>{ if(err){return}; callback() })
+## Getting Started
 
+### Prerequisites
 
-in comment.dao.js, change create to save, create may lead to error since that createComment function is not transcational
-change some other create to save for same reasons
+For development, you will need Node.js and MongoDB installed on your environement.
 
-in comment.dao.js, han's deleteComment and updatecomment are changed,
-since we must verify that commentId belongs to user in this session, frontend information is not ok for verification
+### Configuration
 
+In config/dev.js, you need to set the required environemnt variables manually for development purpose. For production, config/prod.js specifies the heroku process.env variables. Currently, the front-end is hosted on https://tunes-app.herokuapp.com.
 
+### Available Scripts
+
+Before running the server, run:
+
+### `sudo mongod`
+
+Opens the MongoDB server.
+
+Then in the project directory, run:
+
+### `npm run dev`
+
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
+
+## Author
+
+Zexi Han, Zhongheng Yang, Tao Ouyang
