@@ -28,6 +28,10 @@ Opens the MongoDB server.
 
 Then in the project directory, run:
 
+### `npm install`
+
+Installs the dependencies in the local node_modules folder.
+
 ### `npm run dev`
 
 Runs the app in the development mode.<br>
